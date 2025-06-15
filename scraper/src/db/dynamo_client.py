@@ -3,7 +3,7 @@ import os
 
 class DynamoDBClient:
     # A client for interacting with DynamoDB to manage news articles
-    def __init__(self, table_name="NewsArticles"):
+    def __init__(self, table_name=os.getenv('TABLE_NAME')):
         # self.table_name = table_name
         self.dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION'))
         self.table = self.dynamodb.Table(table_name)

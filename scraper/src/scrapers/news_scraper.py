@@ -5,7 +5,7 @@ import json
 import os
 
 # @Scraper Money Control
-def scrape_moneycontrol(max_pages=2):
+def scrape_moneycontrol(max_pages=30):
     base_url = "https://www.moneycontrol.com/news/business/markets"
     articles = []
 
@@ -94,5 +94,5 @@ def scrape_livemint():
 # @Main function to scrape all news
 def scrape_all_news():
     mc = scrape_moneycontrol()
-    # lm = scrape_livemint()
-    return mc
+    lm = scrape_livemint()
+    return mc + lm
