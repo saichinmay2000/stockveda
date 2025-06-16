@@ -43,3 +43,8 @@ htmlcov/
 # FAISS index files (if generated locally)
 **/index.faiss
 **/index.pkl
+
+
+# Build artifacts
+# Ignore build directories
+**/build/

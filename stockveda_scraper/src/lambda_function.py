@@ -25,4 +25,4 @@ def lambda_handler(event, context):
         'body': f"Inserted {len(news)} news articles into DynamoDB."
     }
     
-lambda_handler(1, 1)  # For local testing, remove this line in production    
+# lambda_handler(1, 1)  # For local testing, remove this line in production    
