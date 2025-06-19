@@ -32,3 +32,7 @@ def ask_question(request: QueryRequest):
     answer, source_docs = rag.ask(request.question)
     sources = [doc.metadata.get("url", "") for doc in source_docs]
     return QueryResponse(answer=answer, sources=sources)
+
+@app.get("/")
+def greet():
+    return {"message": "Welcome to StockVeda RAG API!"}
