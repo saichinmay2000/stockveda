@@ -1,4 +1,4 @@
-def lambda_handler(event, context):
+def main():
     from scrapers.news_scraper import scrape_all_news
     # from scrapers.sebi_scraper import scrape_sebi_press_releases
     from db.dynamo_client import DynamoDBClient
@@ -20,9 +20,15 @@ def lambda_handler(event, context):
 
     print(f"✅ Inserted {len(news)} news articles into DynamoDB.")
     
-    return {
-        'statusCode': 200,
-        'body': f"Inserted {len(news)} news articles into DynamoDB."
-    }
+    # return {
+    #     'statusCode': 200,
+    #     'body': f"Inserted {len(news)} news articles into DynamoDB."
+    # }
+    print("Done! 🏁")
     
 # lambda_handler(1, 1)  # For local testing, remove this line in production    
+
+if __name__ == "__main__":
+    main()
+    # Uncomment the line below to run the scraper locally
+    # lambda_handler(1, 1)  # For local testing, remove this line in production

@@ -32,8 +32,31 @@ class DynamoDBClient:
             ExpressionAttributeValues={":val": True}
         )
         
+    # def fetch_unembedded_articles(self):
+    #     response = self.table.scan(
+    #         FilterExpression=Attr("embedded").eq(False)
+    #     )
+    #     return response.get("Items", [])
+    
     def fetch_unembedded_articles(self):
-        response = self.table.scan(
-            FilterExpression=Attr("embedded").eq(False)
-        )
-        return response.get("Items", [])
+        items = []
+        last_evaluated_key = None
+
+        while True:
+            if last_evaluated_key:
+                response = self.table.scan(
+                    FilterExpression=Attr("embedded").eq(False),
+                    ExclusiveStartKey=last_evaluated_key
+                )
+            else:
+                response = self.table.scan(
+                    FilterExpression=Attr("embedded").eq(False)
+                )
+
+            items.extend(response.get("Items", []))
+            last_evaluated_key = response.get("LastEvaluatedKey")
+
+            if not last_evaluated_key:
+                break
+
+        return items
